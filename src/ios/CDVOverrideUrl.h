@@ -2,6 +2,6 @@
 
 @interface CDVOverrideUrl : CDVPlugin
 
-- (void) greet:(CDVInvokedUrlCommand*)command;
+- (BOOL)shouldOverrideLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType;
 
 @end

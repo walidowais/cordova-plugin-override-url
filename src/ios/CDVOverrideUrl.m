@@ -2,17 +2,19 @@
 
 @implementation CDVOverrideUrl
 
-- (void)greet:(CDVInvokedUrlCommand*)command
+- (BOOL)shouldOverrideLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
+    NSRange range = [request.URL.absoluteString rangeOfString:@"(?!.*(pdf)).*(file:\/\/|squareupstaging.com\/(login|logout|payroll|mp/redirect)).*"
+                                                      options:NSRegularExpressionSearch];
 
-    NSString* name = [[command arguments] objectAtIndex:0];
-    NSString* msg = [NSString stringWithFormat: @"Hello, %@", name];
-
-    CDVPluginResult* result = [CDVPluginResult
-                               resultWithStatus:CDVCommandStatus_OK
-                               messageAsString:msg];
-
-    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
+    if ((navigationType == UIWebViewNavigationTypeLinkClicked && range.location == NSNotFound) ||
+        [request.URL.absoluteString containsString:@"squareupstaging.com/payroll/pdf"])
+    {
+        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:request.URL]];
+        [[UIApplication sharedApplication] openURL:request.URL];
+        return NO;
+    }
+    return YES;
 }
 
 @end
