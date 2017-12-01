@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-override-url"
+        version="0.4.20">
+
+  <name>Override Url</name>
+  <description>This cordova plugin lets to override specific urls from being opened in a cordova web view.</description>
+  <license>Apache 2.0</license>
+  <keywords>cordova,override,url,load,webview</keywords>
+  <repo>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <!-- Override Url -->
+  <js-module src="www/override_url.js" name="overrideUrl">
+    <clobbers target="overrideUrl" />
+  </js-module>
+
+  <!-- Android -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="OverrideUrl">
+        <param name="android-package" value="com.cordova.plugins.overrideurl.OverrideUrl" />
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+    <source-file src="src/android/OverrideUrl.java"/>
+  </platform>
+
+  <!-- iOS -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="OverrideUrl">
+        <param name="ios-package" value="CDVOverrideUrl" />
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+    <header-file src="src/ios/CDVOverrideUrl.h"/>
+    <source-file src="src/ios/CDVOverrideUrl.m"/>
+  </platform>
+</plugin>

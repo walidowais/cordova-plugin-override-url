@@ -1,0 +1,32 @@
+{
+  "name": "cordova-override-url",
+  "version": "0.4.20",
+  "description": "Cordova plugin to override opening specific urls in web view",
+  "cordova": {
+    "id": "cordova-override-url",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/walidowais/cordova-override-url.git"
+  },
+  "keywords": [
+    "cordova",
+    "override",
+    "load",
+    "url",
+    "request",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Walid Owais",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/walidowais/cordova-override-url/issues"
+  },
+  "homepage": "https://github.com/walidowais/cordova-override-url#readme"
+}
