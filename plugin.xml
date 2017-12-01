@@ -7,7 +7,6 @@
   <description>This cordova plugin lets to override specific urls from being opened in a cordova web view.</description>
   <license>Apache 2.0</license>
   <keywords>cordova,override,url,load,webview</keywords>
-  <repo>
 
   <engines>
     <engine name="cordova" version=">=3.4.0"/>
@@ -26,7 +25,7 @@
         <param name="onload" value="true" />
       </feature>
     </config-file>
-    <source-file src="src/android/OverrideUrl.java"/>
+    <source-file src="src/android/OverrideUrl.java" />
   </platform>
 
   <!-- iOS -->
@@ -37,7 +36,7 @@
         <param name="onload" value="true" />
       </feature>
     </config-file>
-    <header-file src="src/ios/CDVOverrideUrl.h"/>
-    <source-file src="src/ios/CDVOverrideUrl.m"/>
+    <header-file src="src/ios/CDVOverrideUrl.h" />
+    <source-file src="src/ios/CDVOverrideUrl.m" />
   </platform>
 </plugin>

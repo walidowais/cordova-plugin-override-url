@@ -12,7 +12,11 @@ Install the plugin
 
 Base plugin class functions overridden:
  - iOS
-    `- (BOOL)shouldOverrideLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType`
+```
+- (BOOL)shouldOverrideLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
+```
 - Android
-    `public boolean onOverrideUrlLoading(String url)`
-    `public Boolean shouldAllowNavigation(String url)`
+```
+public boolean onOverrideUrlLoading(String url)
+public Boolean shouldAllowNavigation(String url)
+```
