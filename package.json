@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/walidowais/cordova-override-url.git"
+    "url": "https://github.com/walidowais/cordova-plugin-override-url"
   },
   "keywords": [
     "cordova",
@@ -26,7 +26,7 @@
   "author": "Walid Owais",
   "license": "Apache 2.0",
   "bugs": {
-    "url": "https://github.com/walidowais/cordova-override-url/issues"
+    "url": "https://github.com/walidowais/cordova-plugin-override-url/issues"
   },
-  "homepage": "https://github.com/walidowais/cordova-override-url#readme"
+  "homepage": "https://github.com/walidowais/cordova-plugin-override-url#readme"
 }
