@@ -1,4 +1,4 @@
-# Cordova Hello World Plugin
+# Cordova Override Url Plugin
 
 Plugin that allows overriding opening specific urls in the web view
 Supports iOS and Android
@@ -7,8 +7,9 @@ Supports iOS and Android
 
 Install the plugin
 
-    $ cordova plugin add https://github.com/walidowais/cordova-override-url.git
+    $ cordova plugin add https://github.com/walidowais/cordova-plugin-override-url.git
 
+## What it do
 
 Base plugin class functions overridden:
  - iOS
