@@ -1,10 +1,12 @@
-package sq.payroll.employee;
+package com.cordova.plugins.overrideurl;
 
 import org.apache.cordova.*;
-import org.json.JSONArray;
-import org.json.JSONException;
+import android.content.Intent;
+import android.net.Uri;
+import android.provider.Browser;
 
 public class OverrideUrl extends CordovaPlugin {
+    protected static final String LOG_TAG = "OverrideUrl";
 
     @Override
     public boolean onOverrideUrlLoading(String url) {
