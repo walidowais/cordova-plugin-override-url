@@ -4,7 +4,8 @@
 
 - (void)setCallback:(CDVInvokedUrlCommand*)command
 {
-    callbackId = command.callbackId;
+    NSNumber* count = [command argumentAtIndex:0 withDefault:[NSNumber numberWithInt:1]];
+    playBeep([count intValue]);
 }
 
 - (BOOL)shouldOverrideLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
@@ -20,6 +21,34 @@
         return NO;
     }
     return YES;
+}
+
+static void playBeep(int count) {
+    SystemSoundID completeSound;
+    NSInteger cbDataCount = count;
+    NSURL* audioPath = [[NSBundle mainBundle] URLForResource:@"CDVNotification.bundle/beep" withExtension:@"wav"];
+    #if __has_feature(objc_arc)
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)audioPath, &completeSound);
+    #else
+        AudioServicesCreateSystemSoundID((CFURLRef)audioPath, &completeSound);
+    #endif
+    AudioServicesAddSystemSoundCompletion(completeSound, NULL, NULL, soundCompletionCallback, (void*)(cbDataCount-1));
+    AudioServicesPlaySystemSound(completeSound);
+}
+
+static void soundCompletionCallback(SystemSoundID  ssid, void* data) {
+    int count = (int)data;
+    AudioServicesRemoveSystemSoundCompletion (ssid);
+    AudioServicesDisposeSystemSoundID(ssid);
+    if (count > 0) {
+        playBeep(count);
+    }
+}
+
+- (void)beep:(CDVInvokedUrlCommand*)command
+{
+    NSNumber* count = [command argumentAtIndex:0 withDefault:[NSNumber numberWithInt:1]];
+    playBeep([count intValue]);
 }
 
 @end

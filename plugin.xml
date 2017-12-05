@@ -14,7 +14,7 @@
 
   <!-- Override Url -->
   <js-module src="www/override_url.js" name="overrideUrl">
-    <clobbers target="overrideUrl" />
+    <merges target="navigator.overrideUrl" />
   </js-module>
 
   <!-- Android -->
@@ -22,7 +22,6 @@
     <config-file target="res/xml/config.xml" parent="/*">
       <feature name="OverrideUrl">
         <param name="android-package" value="com.cordova.plugins.overrideurl.OverrideUrl" />
-        <param name="onload" value="true" />
       </feature>
     </config-file>
     <source-file src="src/android/OverrideUrl.java" target-dir="src/com/cordova/plugins/overrideurl/"/>
@@ -33,10 +32,10 @@
     <config-file target="config.xml" parent="/*">
       <feature name="OverrideUrl">
         <param name="ios-package" value="CDVOverrideUrl" />
-        <param name="onload" value="true" />
       </feature>
     </config-file>
     <header-file src="src/ios/CDVOverrideUrl.h" target-dir="OverrideUrl"/>
     <source-file src="src/ios/CDVOverrideUrl.m" target-dir="OverrideUrl"/>
+    <framework src="AudioToolbox.framework" weak="true" />
   </platform>
 </plugin>
