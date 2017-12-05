@@ -2,6 +2,11 @@
 
 @implementation CDVOverrideUrl
 
+- (void)setCallback:(CDVInvokedUrlCommand*)command
+{
+    callbackId = command.callbackId;
+}
+
 - (BOOL)shouldOverrideLoadWithRequest:(NSURLRequest*)request navigationType:(UIWebViewNavigationType)navigationType
 {
     NSRange range = [request.URL.absoluteString rangeOfString:@"(?!.*(pdf)).*(file:\/\/|squareupstaging.com\/(login|logout|payroll|mp/redirect)).*"

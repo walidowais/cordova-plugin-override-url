@@ -1,9 +1,9 @@
 {
-  "name": "cordova-override-url",
+  "name": "cordova-plugin-override-url",
   "version": "0.4.20",
   "description": "Cordova plugin to override opening specific urls in web view",
   "cordova": {
-    "id": "cordova-override-url",
+    "id": "cordova-plugin-override-url",
     "platforms": [
       "android",
       "ios"
