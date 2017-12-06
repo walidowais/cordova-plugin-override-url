@@ -4,10 +4,28 @@ NSString* callbackId;
 
 @implementation CDVOverrideUrl
 
+- (void)_ready:(CDVInvokedUrlCommand*)command
+{
+    _eventsCallbackId = command.callbackId;
+}
+
+- (void)fireUrlEvent:(NSString*)url
+{
+    if (_eventsCallbackId == nil) {
+        NSLog(@"CDVOverrideUrl no callback set");
+        return;
+    }
+    NSDictionary* payload = @{@"type": @"overrideUrl", @"url": url};
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:payload];
+    [result setKeepCallbackAsBool:YES];
+    [self.commandDelegate sendPluginResult:result callbackId:_eventsCallbackId];
+}
+
 - (void)setCallback:(CDVInvokedUrlCommand*)command
 {
     NSLog(@"CDVOverrideUrl setting callback %@", command.callbackId);
     callbackId = command.callbackId;
+
     CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"callback set"];
     [pluginResult setKeepCallbackAsBool:YES];
     [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
@@ -23,48 +41,10 @@ NSString* callbackId;
         [request.URL.absoluteString containsString:@"squareupstaging.com/payroll/pdf"])
     {
         NSLog(@"CDVOverrideUrl overriding url %@", request.URL.absoluteString);
-        if (callbackId)
-        {
-            CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:request.URL.absoluteString];
-            [pluginResult setKeepCallbackAsBool:YES];
-            [self.commandDelegate sendPluginResult:pluginResult callbackId:callbackId];
-        } else {
-            NSLog(@"CDVOverrideUrl no callback set");
-        }
-
-        [[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:CDVPluginHandleOpenURLNotification object:request.URL]];
-        [[UIApplication sharedApplication] openURL:request.URL];
+        [self fireUrlEvent];
         return NO;
     }
     return YES;
-}
-
-static void playBeep(int count) {
-    SystemSoundID completeSound;
-    NSInteger cbDataCount = count;
-    NSURL* audioPath = [[NSBundle mainBundle] URLForResource:@"CDVNotification.bundle/beep" withExtension:@"wav"];
-    #if __has_feature(objc_arc)
-        AudioServicesCreateSystemSoundID((__bridge CFURLRef)audioPath, &completeSound);
-    #else
-        AudioServicesCreateSystemSoundID((CFURLRef)audioPath, &completeSound);
-    #endif
-    AudioServicesAddSystemSoundCompletion(completeSound, NULL, NULL, soundCompletionCallback, (void*)(cbDataCount-1));
-    AudioServicesPlaySystemSound(completeSound);
-}
-
-static void soundCompletionCallback(SystemSoundID  ssid, void* data) {
-    int count = (int)data;
-    AudioServicesRemoveSystemSoundCompletion (ssid);
-    AudioServicesDisposeSystemSoundID(ssid);
-    if (count > 0) {
-        playBeep(count);
-    }
-}
-
-- (void)beep:(CDVInvokedUrlCommand*)command
-{
-    NSNumber* count = [command argumentAtIndex:0 withDefault:[NSNumber numberWithInt:1]];
-    playBeep([count intValue]);
 }
 
 @end
