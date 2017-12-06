@@ -3,9 +3,9 @@
 #import <AudioToolbox/AudioServices.h>
 #import <Cordova/CDVPlugin.h>
 
-@interface CDVOverrideUrl : CDVPlugin {
-  NSString* callbackId;
-}
+@interface CDVOverrideUrl : CDVPlugin
+
+extern NSString* callbackId;
 
 - (void)beep:(CDVInvokedUrlCommand*)command;
 - (void)setCallback:(CDVInvokedUrlCommand*)command;

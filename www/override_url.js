@@ -2,9 +2,9 @@ var exec = require('cordova/exec');
 var platform = require('cordova/platform');
 
 module.exports = {
-    setCallback: function(count, callback) {
+    setCallback: function(count, callback, error) {
         var defaultedCount = count || 1;
-        exec(callback, null, 'OverrideUrl', 'setCallback', [ defaultedCount ]);
+        exec(callback, error, 'OverrideUrl', 'setCallback', [ defaultedCount ]);
     },
 
     /**
